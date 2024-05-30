@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -16,6 +16,7 @@ import ErrorPage from './ErrorPage'
 import Header from './Header'
 import Footer from './Footer'
 
+import { AuthContext } from './authContext'
 
 function Layout() {
   return (
@@ -47,6 +48,22 @@ const router = createBrowserRouter([
   }
 ])
 
+const AuthContextProvider = ({ children }) => {
+  const [accessToken, setAccessToken] = useState([])
+
+  const auth = {
+    accessToken,
+    setAccessToken
+  }
+    return (
+      <AuthContext.Provider value={{ auth }} >
+        {children}
+      </AuthContext.Provider>
+   )
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <AuthContextProvider>
   <RouterProvider router={router} />
+  </AuthContextProvider>
 )
