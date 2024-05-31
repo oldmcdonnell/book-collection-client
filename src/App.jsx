@@ -19,10 +19,6 @@ function App() {
   const getBooks = () => {
     fetchAll({ auth })
   }
-  const getUpdate = () => {
-    updateBook({ auth })
-  }
-  
 
   return (
     <div className="p-5">
@@ -32,7 +28,6 @@ function App() {
       <button onClick={()=> getProfile()}>Fetch profile</button>
       <button onClick={()=> getOneBook()}>Show single </button>
       <button onClick={()=> getBooks()}>Show Books</button>
-      <button onClick={()=> getUpdate()}>Update Book</button>
       <UpdateBook auth={ auth }/>
     </div>
   )

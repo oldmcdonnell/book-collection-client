@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "./authContext"
 import { createUser, getToken } from "./api"
+import CreateBook from "./CreateBook"
 
 function Login() {
   const { auth } = useContext(AuthContext)
@@ -33,6 +34,7 @@ function Login() {
       <button onClick={() => submit()}>Submit</button>
       </div>
       <hr/>
+      <CreateBook />
       {/* <CreateUser /> */}
       </>
   )

@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Protected Component={App} />
+        element: <Protected component={App} />
       },
       {
         path: '/login',
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
 
 
 const AuthContextProvider = ({ children }) => {
-  const [accessToken, setAccessToken] = useState(false)
+  const [accessToken, setAccessToken] = useState(undefined)
 
   const auth = {
     accessToken,
