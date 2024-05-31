@@ -9,9 +9,8 @@ function CreateBook ({ auth }) {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [genre, setGenre] = useState('')
-
+    console.log('access token', auth)
     const submit = () => {
-        console.log('access token', auth.accessToken)
         return axios({
             method: 'POST',
             url: `${baseUrl}/get-books/`,

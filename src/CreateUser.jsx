@@ -13,7 +13,7 @@ const CreateUser = () => {
   
     return (
       <div className="p-5">
-        <h1>Create User</h1>
+        <h1>New User</h1>
         <div>
           <div>Username:</div>
           <input

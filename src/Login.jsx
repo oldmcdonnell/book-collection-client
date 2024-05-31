@@ -1,13 +1,21 @@
-import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthContext } from "./authContext"
 import { createUser, getToken } from "./api"
 import CreateBook from "./CreateBook"
+import CreateUser from "./CreateUser"
 
 function Login() {
   const { auth } = useContext(AuthContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
+  useEffect(()=> {
+    if (auth.accessToken){
+      navigate('/')
+    }
+  },[navigate, auth.accessToken])
 
   const submit = () => {
     getToken({ auth, username, password})
@@ -34,8 +42,7 @@ function Login() {
       <button onClick={() => submit()}>Submit</button>
       </div>
       <hr/>
-      <CreateBook />
-      {/* <CreateUser /> */}
+      <CreateUser />
       </>
   )
 }

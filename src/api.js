@@ -72,6 +72,7 @@ export const fetchAll = ({ auth }) => {
             Authorization: `Bearer ${auth.accessToken}`
         },
     }).then(response=> {
+        
         console.log('fetch book resposne', response)
     }).catch(error => console.log('Book ERROR: ', error))
 }

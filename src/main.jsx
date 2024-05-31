@@ -18,7 +18,8 @@ import Footer from './Footer'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from './authContext'
-import Protected from './Protected'
+import { Navigate } from 'react-router-dom';
+// import Protected from './Protected'
 
 function Layout() {
   return (
@@ -32,6 +33,18 @@ function Layout() {
   )
 }
 
+const Protected = ({ component }) => {
+  const { auth } = useContext(AuthContext);
+  console.log('prtected auth state ', auth)
+  return auth?.accessToken ? (
+    <>
+    {component}
+    </>
+  ) : (
+    <Navigate to="/login" replace={true} />
+  );
+};
+
 
 const router = createBrowserRouter([
   {
@@ -40,7 +53,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Protected component={App} />
+        element: <Protected component={<App />} />
       },
       {
         path: '/login',

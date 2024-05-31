@@ -4,6 +4,7 @@ import { AuthContext } from './authContext';
 
 const Protected = ({ component }) => {
   const { auth } = useContext(AuthContext);
+  console.log('prtected auth state ', auth)
   return auth?.accessToken ? (
     <>
     {component}
