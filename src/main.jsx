@@ -52,7 +52,7 @@ const router = createBrowserRouter([
 
 
 const AuthContextProvider = ({ children }) => {
-  const [accessToken, setAccessToken] = useState([])
+  const [accessToken, setAccessToken] = useState(false)
 
   const auth = {
     accessToken,
