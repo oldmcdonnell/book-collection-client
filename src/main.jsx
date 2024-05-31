@@ -15,8 +15,10 @@ import Login from './Login'
 import ErrorPage from './ErrorPage'
 import Header from './Header'
 import Footer from './Footer'
-
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
 import { AuthContext } from './authContext'
+import Protected from './Protected'
 
 function Layout() {
   return (
@@ -30,6 +32,7 @@ function Layout() {
   )
 }
 
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -37,8 +40,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <App />,
-        errorElement: <ErrorPage />
+        element: <Protected Component={App} />
       },
       {
         path: '/login',
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
     ]
   }
 ])
+
 
 const AuthContextProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState([])

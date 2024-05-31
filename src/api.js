@@ -47,3 +47,47 @@ export const fetchUser = ({ auth }) => {
         console.log('fetch user resposne', response)
     }).catch(error => console.log('ERROR: ', error))
 }
+
+export const fetchSingle = ({ auth }) => {
+    axios({
+        method: 'POST',
+        url: `${baseUrl}/get-books/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        },
+        data: {
+            id: 2
+        }
+    }).then(response=> {
+        console.log('fetch book resposne', response)
+    }).catch(error => console.log('Book ERROR: ', error))
+}
+
+
+export const fetchAll = ({ auth }) => {
+    axios({
+        method: 'GET',
+        url: `${baseUrl}/get-books/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        },
+    }).then(response=> {
+        console.log('fetch book resposne', response)
+    }).catch(error => console.log('Book ERROR: ', error))
+}
+
+export const updateBook = ({ auth }) => {
+    axios({
+        method: 'PUT',
+        url: `${baseUrl}/get-books/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        },
+        data: {
+            id: 5,
+            title: 'testing title'
+        }       
+    }).then(response=> {
+        console.log('fetch book resposne', response)
+    }).catch(error => console.log('Edit ERROR: ', error))
+}
