@@ -30,9 +30,11 @@ function App() {
   const { auth } = useContext(AuthContext)
   const [books, setBooks] = useState([])
 
-// useEffect(()=> {
-//   fetchAll()
-// }, [])
+useEffect(()=> {
+  if (auth.accessToken){
+    fetchAll()
+  }
+}, [auth.accessToken])
 
   const getProfile = () => {
     fetchUser({ auth })

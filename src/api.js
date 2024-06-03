@@ -72,23 +72,66 @@ export const fetchAll = ({ auth }) => {
             Authorization: `Bearer ${auth.accessToken}`
         },
     }).then(response=> {
-        
+
         console.log('fetch book resposne', response)
     }).catch(error => console.log('Book ERROR: ', error))
 }
 
-export const updateBook = ({ auth }) => {
+export const updateBook = ({ auth, bookId, newTitle, newAuthor, newGenre }) => {
     axios({
         method: 'PUT',
-        url: `${baseUrl}/get-books/`,
+        url: `${baseUrl}/update-book/${bookId}/`,  // Include the book ID in the URL
         headers: {
             Authorization: `Bearer ${auth.accessToken}`
         },
         data: {
-            id: 5,
-            title: 'testing title'
+            title: newTitle,
+            author: newAuthor,
+            genre: newGenre
         }       
     }).then(response=> {
-        console.log('fetch book resposne', response)
+        console.log('fetch book response', response)
     }).catch(error => console.log('Edit ERROR: ', error))
+}
+
+
+export const createBookShelf = ({ auth, profile, bookshelf }) => {
+    axios({
+        method: 'PUT',
+        url: `${baseUrl}/create-bookshelf/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        },
+        data: {
+            profile: profile,
+            bookshelf: bookshelf
+        }       
+    }).then(response => {
+        console.log('fetch bookshelf response', response);
+        // Handle success response if needed
+    }).catch(error => {
+        console.log('Create Bookshelf Error:', error);
+        // Handle error if needed
+    });
+}
+
+export const addBook = ({ auth, title, author, genre }) => {
+    axios({
+        method: 'POST',  // Assuming you're creating a new book, so use POST instead of PUT
+        url: `${baseUrl}/create-book/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        },
+        data: {
+            title: title,
+            author: author,
+            genre: genre,
+        }       
+    }).then(response => {
+        console.log('fetch bookshelf response', response);
+        // Handle success response if needed
+    }).catch(error => {
+        console.log('Create Bookshelf Error:', error);
+        // Handle error if needed
+    });
 }
