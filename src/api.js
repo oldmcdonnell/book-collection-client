@@ -63,6 +63,20 @@ export const fetchSingle = ({ auth }) => {
     }).catch(error => console.log('Book ERROR: ', error))
 }
 
+export const fetchAllBooks = ({ auth }) => {
+    return axios({
+        method: 'GET',
+        url: `${baseUrl}/get-books/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        }
+    }).then(response => {
+        return response.data;  // Return the data from the response
+    }).catch(error => {
+        console.log('Fetch Books Error:', error);
+        throw error;
+    });
+};
 
 export const fetchAll = ({ auth }) => {
     axios({
@@ -126,6 +140,28 @@ export const addBook = ({ auth, title, author, genre }) => {
             title: title,
             author: author,
             genre: genre,
+        }       
+    }).then(response => {
+        console.log('fetch bookshelf response', response);
+        // Handle success response if needed
+    }).catch(error => {
+        console.log('Create Bookshelf Error:', error);
+        // Handle error if needed
+    });
+}
+
+
+export const addBookToShelf = ({ auth, bookId, book, bookshelf }) => {
+    axios({
+        method: 'POST',  // Assuming you're creating a new book, so use POST instead of PUT
+        url: `${baseUrl}/add-to-bookshelf/`,
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+        },
+        data: {
+            bookId: bookId,
+            book: book,
+            bookshelf: bookshelf,
         }       
     }).then(response => {
         console.log('fetch bookshelf response', response);
