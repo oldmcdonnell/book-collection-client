@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import ReactDOM from 'react-dom/client'
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter, Routes, and Route
 import {
   createBrowserRouter,
-  RouterProvider,
   Outlet,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 // project styles
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-import App from './App'
-import Login from './Login'
-import ErrorPage from './ErrorPage'
-import Header from './Header'
-import Footer from './Footer'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { AuthContext } from './authContext'
+import App from './App';
+import Login from './Login';
+import ErrorPage from './ErrorPage';
+import Header from './Header';
+import Footer from './Footer';
+import { useContext } from 'react';
+import { AuthContext } from './authContext';
 import { Navigate } from 'react-router-dom';
 // import Protected from './Protected'
 
@@ -30,21 +29,20 @@ function Layout() {
       </div>
       <Footer />
     </>
-  )
+  );
 }
 
 const Protected = ({ component }) => {
   const { auth } = useContext(AuthContext);
-  console.log('prtected auth state ', auth)
+  console.log('protected auth state ', auth);
   return auth?.accessToken ? (
     <>
-    {component}
+      {component}
     </>
   ) : (
     <Navigate to="/login" replace={true} />
   );
 };
-
 
 const router = createBrowserRouter([
   {
@@ -61,31 +59,17 @@ const router = createBrowserRouter([
       },
     ]
   }
-])
+]);
 
-
-const AuthContextProvider = ({ children }) => {
-  let tempToken = JSON.parse(localStorage.getItem('token'))
-  const [accessToken, setAccessToken] = useState(tempToken ? tempToken : [])
-
-  useEffect(() => {
-    localStorage.setItem("token", JSON.stringify(accessToken))
-  }, [accessToken])
-  
-
-  const auth = {
-    accessToken,
-    setAccessToken
-  }
-    return (
-      <AuthContext.Provider value={{ auth }} >
-        {children}
-      </AuthContext.Provider>
-   )
+function Root() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <AuthContextProvider>
-  <RouterProvider router={router} />
-  </AuthContextProvider>
-)
+ReactDOM.render(<Root />, document.getElementById('root'));
